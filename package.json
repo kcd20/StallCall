@@ -1,0 +1,39 @@
+{
+  "name": "stallcall",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Order-ahead web app for Singapore hawker centres",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "npm@11.6.2",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*",
+    "services/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "predev": "npm run build -w @stallcall/shared",
+    "dev": "concurrently -k -n menu,order,payment,notify,customer,stall -c blue,green,yellow,magenta,cyan,red \"npm run dev -w @stallcall/menu-service\" \"npm run dev -w @stallcall/order-service\" \"npm run dev -w @stallcall/payment-service\" \"npm run dev -w @stallcall/notification-service\" \"npm run dev -w @stallcall/customer-web\" \"npm run dev -w @stallcall/stall-dashboard\"",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
+    "concurrently": "^10.0.7",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0"
+  }
+}
