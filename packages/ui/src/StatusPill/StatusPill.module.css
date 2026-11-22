@@ -1,0 +1,51 @@
+.pill {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 14px var(--font-body);
+  white-space: nowrap;
+  /* Each tone below sets these three variables. */
+  background: var(--pill-soft);
+  color: var(--pill-ink);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pill-dot);
+  flex: none;
+}
+
+.received {
+  --pill-soft: var(--color-received-soft);
+  --pill-ink: var(--color-received-ink);
+  --pill-dot: var(--color-received);
+}
+
+.preparing {
+  --pill-soft: var(--color-preparing-soft);
+  --pill-ink: var(--color-preparing-ink);
+  --pill-dot: var(--color-preparing);
+}
+
+.ready {
+  --pill-soft: var(--color-ready-soft);
+  --pill-ink: var(--color-ready-ink);
+  --pill-dot: var(--color-ready);
+}
+
+.neutral {
+  --pill-soft: var(--color-sunk);
+  --pill-ink: var(--color-ink-muted);
+  --pill-dot: var(--color-ink-muted);
+}
+
+.cancelled {
+  --pill-soft: var(--color-accent-soft);
+  --pill-ink: var(--color-accent-ink);
+  --pill-dot: var(--color-accent);
+}
