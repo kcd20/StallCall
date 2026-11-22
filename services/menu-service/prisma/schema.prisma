@@ -1,0 +1,42 @@
+// menu-service database schema.
+// All tables live in the Postgres schema "menu", which only this service may touch.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["menu"]
+}
+
+model Stall {
+  id             String  @id @default(uuid()) @db.Uuid
+  name           String
+  stallNumber    String  @map("stall_number") // e.g. "#01-23"
+  hawkerCentre   String  @map("hawker_centre")
+  cuisine        String
+  isOpen         Boolean @default(true) @map("is_open")
+  avgPrepMinutes Int     @default(10) @map("avg_prep_minutes")
+  dishes         Dish[]
+
+  @@unique([hawkerCentre, stallNumber])
+  @@map("stalls")
+  @@schema("menu")
+}
+
+model Dish {
+  id          String  @id @default(uuid()) @db.Uuid
+  stallId     String  @map("stall_id") @db.Uuid
+  stall       Stall   @relation(fields: [stallId], references: [id], onDelete: Cascade)
+  name        String
+  description String  @default("")
+  priceCents  Int     @map("price_cents") // SGD, integer cents
+  isAvailable Boolean @default(true) @map("is_available")
+  imageUrl    String? @map("image_url")
+
+  @@index([stallId])
+  @@map("dishes")
+  @@schema("menu")
+}
